@@ -18,7 +18,7 @@ LIBFT = ./libft/libft.a
 FTPF_DIR = ft_printf
 FTPF = ./ft_printf/libftprintf.a
 RM = rm -rf
-SRCS = main.c
+SRCS = main.c utils.c
 SRC = $(addprefix ./src/,$(SRCS))
 OBJ = $(SRC:.c=.o)
 
