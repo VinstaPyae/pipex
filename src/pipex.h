@@ -29,11 +29,10 @@ typedef struct s_ppx
 	char	*cmdpath;
 }			t_ppx;
 
-int	exec(char *c_cmd, t_ppx *info);
-int	open_file(char *file, int check_flag);
-void	error(void);
 void	ft_free_mem(char **tab);
 char	*get_envp(char *name, char **envp);
 char	*get_path(char *cmd, t_ppx *info);
+int		exec(char *c_cmd, t_ppx *info);
+int		open_file(char *file, int check_flag);
 
 #endif

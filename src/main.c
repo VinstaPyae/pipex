@@ -31,15 +31,20 @@ void	init(t_ppx *info, int argc, char **argv, char **envp)
 	}
 	if (pipe(info->p_fd) == -1)
 	{
-		error();
-		return;
+		perror("\033[31mError");
+		return ;
 	}
 	info->pid = fork();
 	if (info->pid == -1)
 	{
-		error();
-		return;
+		perror("\033[31mError");
+		return ;
 	}
+	choose_process(info);
+}
+
+void	choose_process(t_ppx *info)
+{
 	if (info->pid == 0)
 		child(info);
 	else
@@ -54,13 +59,12 @@ void	init(t_ppx *info, int argc, char **argv, char **envp)
 		{
 			parent(info);
 		}
-		
 	}
 }
 
-int	main(int argc,char *argv[], char **envp)
+int	main(int argc, char *argv[], char **envp)
 {
-	t_ppx info;
+	t_ppx	info;
 
 	if (argc == 5)
 		init(&info, argc, argv, envp);
