@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pzaw <pzaw@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/14 17:04:46 by pzaw              #+#    #+#             */
+/*   Updated: 2024/10/14 17:04:46 by pzaw             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_H
 # define PIPEX_H
 
@@ -11,7 +23,6 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include "../libft/libft.h"
-# include "../ft_printf/ft_printf.h"
 
 typedef struct s_ppx
 {

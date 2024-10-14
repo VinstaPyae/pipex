@@ -15,35 +15,28 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 LIBFT_DIR = libft
 LIBFT = ./libft/libft.a
-FTPF_DIR = ft_printf
-FTPF = ./ft_printf/libftprintf.a
 RM = rm -rf
 SRCS = main.c utils.c
 SRC = $(addprefix ./src/,$(SRCS))
 OBJ = $(SRC:.c=.o)
 
-all: $(LIBFT) $(FTPF) $(NAME)
+all: $(LIBFT) $(NAME)
 
 $(LIBFT):
 	@make -s -C $(LIBFT_DIR)
 
-$(FTPF):
-	@make -s -C $(FTPF_DIR)
-
-$(NAME): $(LIBFT) $(FTPF) $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L$(LIBFT_DIR) -lft -L$(FTPF_DIR) -lftprintf
+$(NAME): $(LIBFT) $(OBJ)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L$(LIBFT_DIR) -lft
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@ -I$(LIBFT_DIR) -I$(FTPF_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(LIBFT_DIR)
 
 clean:
 	@$(RM) $(OBJ)
 	@make -s -C $(LIBFT_DIR) clean
-	@make -s -C $(FTPF_DIR) clean
 
 fclean: clean
 	@$(RM) $(NAME)
 	@make -s -C $(LIBFT_DIR) fclean
-	@make -s -C $(FTPF_DIR) fclean
 
 re: fclean all

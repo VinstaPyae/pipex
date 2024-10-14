@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pzaw <pzaw@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/14 17:04:33 by pzaw              #+#    #+#             */
+/*   Updated: 2024/10/14 17:04:33 by pzaw             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	child(t_ppx *info)
@@ -29,23 +41,26 @@ void	init(t_ppx *info, int argc, char **argv, char **envp)
 	{
 		perror("Error opening file");
 	}
+	if (info->fd_out == -1)
+	{
+		perror("Error opening file");
+	}
 	if (pipe(info->p_fd) == -1)
 	{
 		perror("\033[31mError");
 		return ;
 	}
+}
+
+void	do_fork_process(t_ppx *info)
+{
 	info->pid = fork();
 	if (info->pid == -1)
 	{
 		perror("\033[31mError");
 		return ;
 	}
-	choose_process(info);
-}
-
-void	choose_process(t_ppx *info)
-{
-	if (info->pid == 0)
+	else if (info->pid == 0)
 		child(info);
 	else
 	{
@@ -67,8 +82,11 @@ int	main(int argc, char *argv[], char **envp)
 	t_ppx	info;
 
 	if (argc == 5)
+	{
 		init(&info, argc, argv, envp);
+		do_fork_process(&info);
+	}
 	else
-		ft_printf("\033[31mError: Bad arguments\n\e[0m");
+		ft_putstr_fd("Error: Bad arguments\n", 2);
 	return (0);
 }
